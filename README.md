@@ -1,3 +1,4 @@
 # SlackNewWorkspaceUI
 
-- [Shooooting](github.com/shooooting)
+- [shooooting](github.com/shooooting)
+- [devyhan93](github.com/devyhan93)
