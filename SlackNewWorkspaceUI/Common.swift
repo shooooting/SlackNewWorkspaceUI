@@ -47,13 +47,9 @@ struct CommonUI {
     // UIBarbutton
     static func navigationViewController() -> UIViewController {
         let nameWSViewController = NameWSViewController()
-        
         let VC = UINavigationController(rootViewController: nameWSViewController)
         
-        let tabbarController = UITabBarController()
-        tabbarController.viewControllers = [VC]
-        
-        return tabbarController
+        return VC
     }
     
 }
