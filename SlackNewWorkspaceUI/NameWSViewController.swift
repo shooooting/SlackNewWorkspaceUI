@@ -51,6 +51,7 @@ final class NameWSViewController: UIViewController {
         navigationItem.rightBarButtonItem = self.rightButton
         navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.shadowImage = UIImage()
         
         view.backgroundColor = .white
         setupUI()
@@ -79,11 +80,8 @@ final class NameWSViewController: UIViewController {
         NSLayoutConstraint.activate([
             writeWorkspace.leadingAnchor.constraint(equalTo: safeView.leadingAnchor, constant: CommonUI.margin),
             writeWorkspace.trailingAnchor.constraint(equalTo: safeView.trailingAnchor, constant: -CommonUI.margin),
-            writeWorkspace.centerYAnchor.constraint(equalTo: safeView.centerYAnchor)
         ])
-        
-        textFieldAnimationLabel.alpha = 0
-        
+
         CommonUI.contantsLabel(
             for: textFieldAnimationLabel,
             title: CommonUI.writeWorkspacePlaceholder,
@@ -98,6 +96,9 @@ final class NameWSViewController: UIViewController {
             textFieldAnimationLabel.leadingAnchor.constraint(equalTo: writeWorkspace.leadingAnchor)
         ])
         
+        uiChangeConstraint = writeWorkspace.centerYAnchor.constraint(equalTo: safeView.centerYAnchor)
+        uiChangeConstraint?.isActive = true
+        
         setKeyboardEvent()
         
     }
@@ -105,11 +106,12 @@ final class NameWSViewController: UIViewController {
     // MARK: Action
     
     @objc func keyboardWillAppear(_ sender: NotificationCenter) {
-    
+
+        uiChangeConstraint?.constant = -140
     }
     
     @objc func keyboardWillDisappear(_ sender: NotificationCenter) {
-
+        uiChangeConstraint?.constant = 0
     }
     
     @objc func buttonPressed(_ sender: Any) {
@@ -144,59 +146,23 @@ extension NameWSViewController: UITextFieldDelegate {
     
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        print("change")
-        if textFieldAnimationLabel.text?.isEmpty == false  {
-            
-            UIView.animate(
-                withDuration: 0.3,
-                animations: (
-                    {
-                        self.textFieldAnimationLabel.transform = CGAffineTransform(translationX: 0, y: -20)
-                        self.textFieldAnimationLabel.alpha = 1
-                    }
-                )
-            )
+
+        if writeWorkspace.text!.isEmpty == false  {
+            CommonUI.showUpAnimation(for: textFieldAnimationLabel, showUPAnimationEnable: true)
         } else {
-            UIView.animate(
-                withDuration: 0.3,
-                animations: (
-                    {
-                        self.textFieldAnimationLabel.transform = CGAffineTransform(translationX: 0, y: 0)
-                        self.textFieldAnimationLabel.alpha = 0
-                    }
-                )
-            )
+           CommonUI.showUpAnimation(for: textFieldAnimationLabel, showUPAnimationEnable: false)
         }
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        print(textFieldAnimationLabel.text)
-        if textFieldAnimationLabel.text == "" {
-            print("isempty == true")
+        if writeWorkspace.text!.isEmpty == true {
             self.textFieldAnimationLabel.alpha = 0
         } else {
-            print("isempty == false")
-            UIView.animate(
-                withDuration: 0.3,
-                animations: (
-                    {
-                        self.textFieldAnimationLabel.transform = CGAffineTransform(translationX: 0, y: -20)
-                        self.textFieldAnimationLabel.alpha = 1
-                    }
-                )
-            )
+            CommonUI.showUpAnimation(for: textFieldAnimationLabel, showUPAnimationEnable: true)
         }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-                UIView.animate(
-            withDuration: 0.3,
-            animations: (
-                {
-                    self.textFieldAnimationLabel.transform = CGAffineTransform(translationX: 0, y: 0)
-                    self.textFieldAnimationLabel.alpha = 0
-                }
-            )
-        )
+        CommonUI.showUpAnimation(for: textFieldAnimationLabel, showUPAnimationEnable: false)
     }
 }
