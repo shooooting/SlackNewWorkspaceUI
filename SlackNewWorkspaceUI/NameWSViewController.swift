@@ -140,56 +140,22 @@ extension NameWSViewController: UITextFieldDelegate {
     
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        if textFieldAnimationLabel.text?.isEmpty == false  {
-            UIView.animate(
-                withDuration: 0.3,
-                animations: (
-                    {
-                        self.textFieldAnimationLabel.transform = CGAffineTransform(translationX: 0, y: -20)
-                        self.textFieldAnimationLabel.alpha = 1
-                    }
-                )
-            )
+        if writeWorkspace.text!.isEmpty == false  {
+            CommonUI.showUpAnimation(for: textFieldAnimationLabel, showUPAnimationEnable: true)
         } else {
-            UIView.animate(
-                withDuration: 0.3,
-                animations: (
-                    {
-                        self.textFieldAnimationLabel.transform = CGAffineTransform(translationX: 0, y: 0)
-                        self.textFieldAnimationLabel.alpha = 0
-                    }
-                )
-            )
+           CommonUI.showUpAnimation(for: textFieldAnimationLabel, showUPAnimationEnable: false)
         }
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textFieldAnimationLabel.text == "" {
-            print("isempty == true")
+        if writeWorkspace.text!.isEmpty == true {
             self.textFieldAnimationLabel.alpha = 0
         } else {
-            print("isempty == false")
-            UIView.animate(
-                withDuration: 0.3,
-                animations: (
-                    {
-                        self.textFieldAnimationLabel.transform = CGAffineTransform(translationX: 0, y: -20)
-                        self.textFieldAnimationLabel.alpha = 1
-                    }
-                )
-            )
+            CommonUI.showUpAnimation(for: textFieldAnimationLabel, showUPAnimationEnable: true)
         }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        UIView.animate(
-            withDuration: 0.3,
-            animations: (
-                {
-                    self.textFieldAnimationLabel.transform = CGAffineTransform(translationX: 0, y: 0)
-                    self.textFieldAnimationLabel.alpha = 0
-                }
-            )
-        )
+        CommonUI.showUpAnimation(for: textFieldAnimationLabel, showUPAnimationEnable: false)
     }
 }

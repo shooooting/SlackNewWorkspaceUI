@@ -6,7 +6,6 @@
 //  Copyright © 2020 giftbot. All rights reserved.
 //
 
-
 import UIKit
 
 struct CommonUI {
@@ -17,6 +16,13 @@ struct CommonUI {
     static let titleFontSize: CGFloat = 37
     static let contantsFontSize: CGFloat = 20
     
+    // Navigation
+    static func navigationViewController() -> UIViewController {
+        let nameWSViewController = NameWSViewController()
+        let VC = UINavigationController(rootViewController: nameWSViewController)
+        
+        return VC
+    }
     // UILabel
     static func contantsLabel(for uiView: UILabel, title: String?, fontColor: UIColor,  textAlignment: NSTextAlignment?, addView: UIView) {
         uiView.text = title ?? ""
@@ -31,7 +37,7 @@ struct CommonUI {
         uiButton.setTitle(title, for: .normal)
         uiButton.layer.cornerRadius = 4
         uiButton.setTitleColor(titleColor, for: .normal)
-
+        
         addView.addSubview(uiButton)
     }
     // UITextField
@@ -44,12 +50,29 @@ struct CommonUI {
         
         addView.addSubview(uiTextField)
     }
-    // UIBarbutton
-    static func navigationViewController() -> UIViewController {
-        let nameWSViewController = NameWSViewController()
-        let VC = UINavigationController(rootViewController: nameWSViewController)
-        
-        return VC
+    // Animation
+    static func showUpAnimation(for uiLabel: UILabel, showUPAnimationEnable: Bool) {
+        if showUPAnimationEnable == true {
+            UIView.animate(
+                withDuration: 0.3,
+                animations: (
+                    {
+                        uiLabel.transform = CGAffineTransform(translationX: 0, y: -20)
+                        uiLabel.alpha = 1
+                    }
+                )
+            )
+        } else {
+            UIView.animate(
+                withDuration: 0.3,
+                animations: (
+                    {
+                        uiLabel.transform = CGAffineTransform(translationX: 0, y: 0)
+                        uiLabel.alpha = 0
+                    }
+                )
+            )
+        }
     }
     
 }
