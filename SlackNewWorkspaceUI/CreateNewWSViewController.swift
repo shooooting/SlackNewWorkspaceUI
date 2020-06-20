@@ -17,7 +17,7 @@ final class CreateNewWSViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        view.backgroundColor = .systemGray
+        view.backgroundColor = .systemBackground
     }
     
     // MARK: UI

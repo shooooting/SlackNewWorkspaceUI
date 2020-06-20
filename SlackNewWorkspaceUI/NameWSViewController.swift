@@ -35,6 +35,12 @@ final class NameWSViewController: UIViewController {
         return button
     }()
     
+    let label: UILabel = {
+       let label = UILabel()
+        
+        return label
+    }()
+    
     // MARK: LifeCycle
     
     override func viewDidLoad() {
@@ -48,8 +54,6 @@ final class NameWSViewController: UIViewController {
         
         view.backgroundColor = .white
         setupUI()
-
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,8 +82,8 @@ final class NameWSViewController: UIViewController {
             writeWorkspace.centerYAnchor.constraint(equalTo: safeView.centerYAnchor)
         ])
         
-        
         textFieldAnimationLabel.alpha = 0
+        
         CommonUI.contantsLabel(
             for: textFieldAnimationLabel,
             title: CommonUI.writeWorkspacePlaceholder,
@@ -102,10 +106,7 @@ final class NameWSViewController: UIViewController {
     
     @objc func keyboardWillAppear(_ sender: NotificationCenter) {
     
-        
     }
-    
-
     
     @objc func keyboardWillDisappear(_ sender: NotificationCenter) {
 
@@ -115,7 +116,7 @@ final class NameWSViewController: UIViewController {
         if let button = sender as? UIBarButtonItem {
             switch button.tag {
             case 1: // Change the background color to blue.
-                self.view.backgroundColor = .blue
+                dismiss(animated: true)
             case 2: // Change the background color to red.
                 self.view.backgroundColor = .red
             default: print("error")
@@ -145,6 +146,7 @@ extension NameWSViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         print("change")
         if textFieldAnimationLabel.text?.isEmpty == false  {
+            
             UIView.animate(
                 withDuration: 0.3,
                 animations: (

@@ -44,6 +44,7 @@ struct CommonUI {
         
         addView.addSubview(uiTextField)
     }
+    
     // UIBarbutton
     static func navigationViewController() -> UIViewController {
         let nameWSViewController = NameWSViewController()
