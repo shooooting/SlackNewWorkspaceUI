@@ -23,6 +23,7 @@ struct CommonUI {
         
         return VC
     }
+    
     // UILabel
     static func contantsLabel(for uiView: UILabel, title: String?, fontColor: UIColor,  textAlignment: NSTextAlignment?, addView: UIView) {
         uiView.text = title ?? ""
@@ -47,9 +48,16 @@ struct CommonUI {
         uiTextField.keyboardType = keyboardType
         uiTextField.font = UIFont.boldSystemFont(ofSize: contantsFontSize)
         uiTextField.textColor = .black
+//        uiTextField.becomeFirstResponder()
         
         addView.addSubview(uiTextField)
     }
+    
+    // NameWSVC NaviButton
+//    static func leftButton(for button: UIBarButtonItem, image: UIImage, style: UIBarButtonItem.Style, target: Any, action: Selector) {
+//        
+//    }
+
 
     // Animation
     static func showUpAnimation(for uiLabel: UILabel, showUPAnimationEnable: Bool) {
@@ -60,6 +68,7 @@ struct CommonUI {
                     {
                         uiLabel.transform = CGAffineTransform(translationX: 0, y: -20)
                         uiLabel.alpha = 1
+                        
                     }
                 )
             )

@@ -13,6 +13,7 @@ final class NameWSViewController: UIViewController {
     private var uiChangeAnimation: NSLayoutConstraint?
     private let writeWorkspace = UITextField()
     private let textFieldAnimationLabel = UILabel()
+    private let space = UITextField()
     
     lazy var leftButton: UIBarButtonItem = {
         let button = UIBarButtonItem(
@@ -35,12 +36,6 @@ final class NameWSViewController: UIViewController {
         return button
     }()
     
-    let label: UILabel = {
-       let label = UILabel()
-        
-        return label
-    }()
-    
     // MARK: LifeCycle
     
     override func viewDidLoad() {
@@ -59,6 +54,7 @@ final class NameWSViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.writeWorkspace.becomeFirstResponder()
+        
     }
     
     // MARK: Layout
@@ -74,7 +70,9 @@ final class NameWSViewController: UIViewController {
             textAlignment: .left,
             keyboardType: .default,
             addView: view
+//            beComeFirstResponder: true ?? false
         )
+                
         // Layout
         writeWorkspace.translatesAutoresizingMaskIntoConstraints.toggle()
         NSLayoutConstraint.activate([
@@ -99,7 +97,7 @@ final class NameWSViewController: UIViewController {
         uiChangeConstraint = writeWorkspace.centerYAnchor.constraint(equalTo: safeView.centerYAnchor)
         uiChangeConstraint?.isActive = true
         
-        setKeyboardEvent()
+//        setKeyboardEvent()
         
     }
     
@@ -139,10 +137,10 @@ extension NameWSViewController: UITextFieldDelegate {
         self.view.endEditing(true)
     }
     
-    func setKeyboardEvent() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
+//    func setKeyboardEvent() {
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+//    }
     
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
